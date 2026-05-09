@@ -2,6 +2,7 @@
 name: refactoring-patterns
 description: 以"坏味道"为入口的代码重构技能，基于 Martin Fowler《重构》第 2 版。从症状（神秘命名、过长函数、霰弹式修改、依恋情结、基本类型偏执……24 种坏味道）出发，反查到对应的重构手法，并以"两顶帽子 + 小步前进 + 测试守门"为工作流。语言无关，JavaScript 示例。与 refactoring-patterns（Java/Spring/DDD 偏重）互补：那张技能卡按能力组织，本技能卡按症状组织。
 origin: user
+license: MIT
 ---
 
 # 以坏味道驱动的代码重构

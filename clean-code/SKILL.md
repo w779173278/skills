@@ -2,6 +2,7 @@
 name: clean-code
 description: 基于 Robert C. Martin《代码整洁之道》（Clean Code）的代码编写指南。覆盖命名、函数、注释、格式化、对象与数据结构、错误处理、边界、单元测试、类、系统、并发等核心主题，提供编写、审查、重构代码时可直接对照的清单与示例。
 origin: user
+license: MIT
 ---
 
 # 代码整洁之道（Clean Code）编写指南
