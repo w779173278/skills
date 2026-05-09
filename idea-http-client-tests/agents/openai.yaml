@@ -1,0 +1,4 @@
+interface:
+  display_name: "IDEA HTTP Tests"
+  short_description: "Generate portable IDEA .http integration tests"
+  default_prompt: "Use $idea-http-client-tests to generate or organize IntelliJ IDEA HTTP Client test files for this codebase."

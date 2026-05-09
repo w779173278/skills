@@ -1,0 +1,14 @@
+import requests-with-loop.http
+import get-requests.http
+
+### Request with Include Support, run all requeests from file
+run get-requests.http
+
+### Request with Include Support, run all requeests from file and override
+run get-requests.http (@show_env = 3)
+
+### Request with Include Support, run request with specified name
+run #Request with Loop Support, variables from request
+
+### Request with Include Support, run request with specified name and override
+run #GET request with environment variables (@show_env = 12)

@@ -1,0 +1,32 @@
+### Basic authorization.
+GET https://examples.http-client.intellij.net/basic-auth/user/passwd
+Authorization: Basic user passwd
+
+### Basic authorization with variables.
+GET https://examples.http-client.intellij.net/basic-auth/user/passwd
+Authorization: Basic {{username}} {{password}}
+
+### Digest authorization.
+GET https://examples.http-client.intellij.net/digest-auth/realm/user/passwd
+Authorization: Digest user passwd
+
+### Digest authorization with variables.
+GET https://examples.http-client.intellij.net/digest-auth/realm/user/passwd
+Authorization: Digest {{username}} {{password}}
+
+### Authorization by token, part 1. Retrieve and save token.
+POST https://examples.http-client.intellij.net/body-echo
+Content-Type: application/json
+
+{
+  "token": "my-secret-token"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Authorization by token, part 2. Use token to authorize.
+GET https://examples.http-client.intellij.net/headers
+Authorization: Bearer {{auth_token}}
+
+### Also, check documentation for automatic OAuth2
+GET https://www.jetbrains.com/help/idea/oauth-2-0-authorization.html
