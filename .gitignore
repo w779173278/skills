@@ -1,3 +1,6 @@
 .idea
 .op
 .DS_Store
+.playwright-cli/
+documentation-standards-workspace/
+

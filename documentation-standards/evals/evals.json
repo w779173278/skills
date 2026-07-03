@@ -1,0 +1,73 @@
+{
+  "skill_name": "documentation-standards",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "我为系统设计了一个新的『消息消费流控』模块，需要你根据我们的文档编写规范，为这个模块撰写 `00_文档导航总览.md`。该模块接收客户端拉取消息请求，对其进行限流，包含网关和核心服务，存储使用 Redis，时序包含限流判断。",
+      "expected_output": "生成的导航总览文档需要包含消息消费流控模块的定位、客户端-网关-核心服务-Redis 的 Mermaid 架构/时序交互图，以及模块化文档阅读路径（快速开始、领域模型、功能行为、开发运维、参考规格）。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "contains_correct_title",
+          "description": "文档是否以消息消费流控模块的总览/导航名称为标题"
+        },
+        {
+          "name": "contains_mermaid_sequence_or_diagram",
+          "description": "文档是否包含描述客户端、网关、核心服务、Redis 流控时序的 Mermaid 关系图"
+        },
+        {
+          "name": "has_1_plus_5_navigation_structure",
+          "description": "文档是否按 1+5 规范建立了包含了快速开始、领域模型、功能行为、开发与运维、参考规格的导航链接"
+        },
+        {
+          "name": "no_absolute_paths",
+          "description": "链接中是否没有绝对路径，完全使用相对路径跳转"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "我们需要给流控模块中的『流控规则 (FlowRule)』核心实体撰写领域模型文档。FlowRule 包含租户 ID、规则编码、限流阈值 (QPS)、状态（启用/禁用）。它与租户是 1:N 关系。请用领域模型四步定义法帮我编写 `领域模型/02_流控规则实体定义.md`。",
+      "expected_output": "生成的流控规则实体定义文档需要包含定义、模型关系、核心属性表、行为约束（包含防越权原则、状态流转校验和生命周期级联清理等）四个标准章节。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "contains_four_required_headings",
+          "description": "文档是否严格包含：1. 定义, 2. 模型关系, 3. 核心属性, 4. 行为约束 四个二级标题"
+        },
+        {
+          "name": "defines_1_to_n_relationship_with_tenant",
+          "description": "文档是否在模型关系中清晰阐述了 FlowRule 与 Tenant 是 1:N 关系"
+        },
+        {
+          "name": "contains_flow_rule_attributes_table",
+          "description": "文档是否在核心属性中以 Markdown 表格包含了租户 ID、规则编码、限流阈值 (QPS) 和状态"
+        },
+        {
+          "name": "contains_behavior_constraints",
+          "description": "文档是否在行为约束中定义了运行时流控校验校验、防越权及生命周期/失效规则"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "我想为流控模块编写一个可观测性与监控规格的文档。指标需要包含客户端请求 QPS、限流拦截次数、Redis 耗时。以及一个 prometheus 告警配置当拦截次数持续 1 分钟大于 1000 时告警。需要输出在 `开发与运维/02_可观测性与监控规格.md` 中。",
+      "expected_output": "生成的监控规格文档需要包含核心 Metrics 指标表（含上述 QPS、拦截、耗时三个指标及其维度的合理规划），对应的 Prometheus 告警规则 YAML 配置，以及常见运维命令诊断指导。",
+      "files": [],
+      "assertions": [
+        {
+          "name": "contains_metrics_table",
+          "description": "文档中是否以表格列出了请求 QPS、拦截次数和 Redis 耗时，且明确了 Label/类型"
+        },
+        {
+          "name": "contains_prometheus_yaml",
+          "description": "文档中是否包含了 Prometheus 告警规则 YAML，告警条件为拦截次数持续 1 分钟大于 1000"
+        },
+        {
+          "name": "contains_diagnostic_commands",
+          "description": "文档是否提供了常用的流控运维命令诊断说明"
+        }
+      ]
+    }
+  ]
+}
