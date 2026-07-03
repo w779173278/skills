@@ -5,22 +5,21 @@
 
 ```protobuf
 syntax = "proto3";
-package apache.rocketmq.v2;
+package com.example.api.v1;
 
-// 发送消息的请求结构
-message SendMessageRequest {
-    string message_id = 1;
-    string topic = 2;
-    bytes body = 3;
-    map<string, string> user_properties = 4;
-    int64 delivery_timestamp = 5; // 用于定时/延迟消息
+// 服务请求结构
+message ExecuteRequest {
+    string request_id = 1;
+    string key = 2;
+    bytes payload = 3;
+    map<string, string> attributes = 4;
 }
 
-// 发送消息的应答结构
-message SendMessageResponse {
-    Status status = 1;
-    string message_id = 2;
-    string transaction_id = 3;
+// 服务应答结构
+message ExecuteResponse {
+    int32 code = 1;
+    string message = 2;
+    string request_id = 3;
 }
 ```
 
@@ -29,6 +28,6 @@ message SendMessageResponse {
 
 | 响应状态码 (Code) | HTTP/gRPC 对照码 | 场景描述 | 客户端处理建议 |
 | :--- | :--- | :--- | :--- |
-| `TOPIC_NOT_FOUND` | NOT_FOUND (5) | 服务端没有查找到指定的 Topic 路由。 | 检查 TopicName 是否正确，或是否已在 NameServer 注册。 |
-| `TOO_MANY_REQUESTS` | UNAVAILABLE (14) | 触发了服务端流控（限流）。 | 客户端触发指数退避重试 (Exponential Backoff)。 |
-| `MESSAGE_CORRUPTED` | INVALID_ARGUMENT (3)| 消息体校验和校验失败，数据可能在传输中损坏。 | 重新生成消息并发送。 |
+| `ENTITY_NOT_FOUND` | NOT_FOUND (5) | 服务端没有查找到指定的实体资源。 | 检查传入的资源 Key 是否存在或拼写是否正确。 |
+| `RATE_LIMIT_EXCEEDED` | RESOURCE_EXHAUSTED (8) | 触发了服务端接口流量限制（限流）。 | 客户端触发指数退避重试 (Exponential Backoff)。 |
+| `INVALID_PARAMETER` | INVALID_ARGUMENT (3)| 请求报文校验失败，包含非法参数或格式错误。 | 检查输入参数格式。 |
